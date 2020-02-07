@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logout } from '../../redux'
+import { logout, mapStateToProps } from '../../redux'
 import { Button, Container } from '@material-ui/core'
 
 function Home(props) {
@@ -17,12 +17,6 @@ function Home(props) {
       </Button>
   </Container>
   )
-}
-
-const mapStateToProps = state => {
-  return { 
-    logged: state.logged
-  }
 }
 
 const mapDispatchToProps = dispatch => {

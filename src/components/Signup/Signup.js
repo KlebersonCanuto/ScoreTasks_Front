@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { login, mapStateToProps } from '../../redux'
 import { TextField, Button, Container, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
-function Login(props) {
-
+function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   const submit = (event) => {
     event.preventDefault()
-    props.login()
   }
 
   return (
@@ -27,6 +24,7 @@ function Login(props) {
           onChange={(e) => setEmail(e.target.value)}
           required
           fullWidth
+          type="email"
           label="Email"
           autoFocus
         />
@@ -40,20 +38,30 @@ function Login(props) {
           label="Senha"
           type="password"
         />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          fullWidth
+          required
+          label="Confirme a senha"
+          type="password"
+        />
         <Button
           type="submit"
           fullWidth
           variant="contained"
           color="secondary"
         >
-          Entrar
+          Cadastrar
         </Button>
       </form>
       <Grid container>
         <Grid item>
-          <Link to="/cadastro" className="no-underline underline-hover">
+          <Link to="/" className="no-underline underline-hover">
             <p className="blue f4">
-              Cadastre-se
+              Já possui uma conta? Entrar
             </p>
           </Link>
         </Grid>
@@ -62,13 +70,4 @@ function Login(props) {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    login: () => dispatch(login())
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default Signup
