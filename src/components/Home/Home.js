@@ -1,18 +1,15 @@
 import React from 'react'
-import { Button, Container } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { logout } from '../../redux'
+import { Button, Container } from '@material-ui/core'
 
-function Home() {
-  
-  const submit = (event) => {
-    event.preventDefault()
-  }
-
+function Home(props) {
   return (
     <Container component="main" maxWidth="xs">
       <Button
         type="submit"
         fullWidth
-        onClick={submit}
+        onClick={props.logout}
         variant="contained"
         color="secondary"
       >
@@ -22,4 +19,20 @@ function Home() {
   )
 }
 
-export default Home
+const mapStateToProps = state => {
+  return { 
+    logged: state.logged
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
+

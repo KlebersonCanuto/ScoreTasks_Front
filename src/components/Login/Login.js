@@ -1,9 +1,12 @@
 import React from 'react'
-import { TextField, Button, Container } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { login } from '../../redux'
+import { TextField, Button, Container } from '@material-ui/core'
 
-function Login() {
+function Login(props) {
   const submit = (event) => {
     event.preventDefault()
+    props.login()
   }
 
   return (
@@ -38,4 +41,19 @@ function Login() {
   )
 }
 
-export default Login
+const mapStateToProps = state => {
+  return { 
+    logged: state.logged
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: () => dispatch(login())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)
