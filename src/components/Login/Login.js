@@ -17,7 +17,7 @@ function Login(props) {
   return (
     <Container component="main" maxWidth="xs">
       <p className="f3 b courier tc">
-        Cadastro
+        Entre
       </p>
       <form noValidate onSubmit={submit} autoComplete="off">
         <TextField

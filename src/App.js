@@ -5,11 +5,13 @@ import { mapStateToProps } from './redux'
 import Login from './components/Login/Login'
 import Home from './components/Home/Home'
 import Signup from './components/Signup/Signup'
+import Top from './components/Top/Top'
 
 function App(props) {
   const logged = props.logged
   return (
     <div>
+      <Top/>
       <p className="tc f1 courier"> ScoreTasks </p>
       { !logged && <Route exact path="/"> <Login/> </Route> }
       { logged && <Route exact path="/"> <Home/> </Route> }

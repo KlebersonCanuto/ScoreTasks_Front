@@ -1,32 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { logout, mapStateToProps } from '../../redux'
-import { Button, Container } from '@material-ui/core'
 
-function Home(props) {
+function Home() {
   return (
-    <Container component="main" maxWidth="xs">
-      <Button
-        type="submit"
-        fullWidth
-        onClick={props.logout}
-        variant="contained"
-        color="secondary"
-      >
-        Sair
-      </Button>
-  </Container>
+    <div>
+      <p className="tc f4 courier">
+        Seja bem-vindo
+      </p>
+    </div>
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(logout())
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default Home
 
