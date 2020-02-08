@@ -1,8 +1,9 @@
 import { LOGIN, LOGOUT } from './types'
 
-const login = () => {
+const login = (token) => {
   return {
     type: LOGIN,
+    token: token,
     info: 'Login completed'
   }
 }

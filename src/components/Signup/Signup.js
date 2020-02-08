@@ -1,14 +1,32 @@
 import React, { useState } from 'react'
 import { TextField, Button, Container, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
+import { URL } from '../../utils'
 
 function Signup() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const initialState = {
+    email: '',
+    password: '',
+    confirmPassword: ''
+  } 
+
+  const [data, setData] = useState(initialState)
 
   const submit = (event) => {
     event.preventDefault()
+    Axios.post(`${URL}/user`, data)
+    .then((_) => {
+      setData(initialState);
+    })
+  }
+
+  const handleChanges = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value
+    });
   }
 
   return (
@@ -20,8 +38,9 @@ function Signup() {
         <TextField
           variant="outlined"
           margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={data.email}
+          onChange={handleChanges}
           required
           fullWidth
           type="email"
@@ -31,8 +50,9 @@ function Signup() {
         <TextField
           variant="outlined"
           margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={data.password}
+          onChange={handleChanges}
           fullWidth
           required
           label="Senha"
@@ -40,9 +60,10 @@ function Signup() {
         />
         <TextField
           variant="outlined"
+          name="confirmPassword"
           margin="normal"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={data.confirmPassword}
+          onChange={handleChanges}
           fullWidth
           required
           label="Confirme a senha"

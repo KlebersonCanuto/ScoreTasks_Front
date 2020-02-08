@@ -12,17 +12,17 @@ function Profile() {
   }
 
   const [data, setData] = useState(initialState)
-
+  
   useEffect(() => {
-    Axios.get(`${URL}`, {
+    Axios.get(`${URL}/login/me`, {
       headers: {
         'authorization': token
       }
     })
     .then((res) => {
-      setData(initialState)
+      setData(res.data)
     })
-  })
+  }, [])
 
   return (
     <Container className="tc courier">

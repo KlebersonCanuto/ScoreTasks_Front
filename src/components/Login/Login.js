@@ -3,15 +3,31 @@ import { connect } from 'react-redux'
 import { login, mapStateToProps } from '../../redux'
 import { TextField, Button, Container, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
+import { URL } from '../../utils'
 
 function Login(props) {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const initialState = {
+    email: '',
+    password: ''
+  }
+
+  const [data, setData] = useState(initialState)
 
   const submit = (event) => {
     event.preventDefault()
-    props.login()
+    Axios.post(`${URL}/login`, data)
+    .then((res) => {
+      props.login(res.data.token)
+    })
+  }
+
+  const handleChanges = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value
+    });
   }
 
   return (
@@ -23,8 +39,9 @@ function Login(props) {
         <TextField
           variant="outlined"
           margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={data.email}
+          onChange={handleChanges}
           required
           fullWidth
           label="Email"
@@ -33,8 +50,9 @@ function Login(props) {
         <TextField
           variant="outlined"
           margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={data.password}
+          onChange={handleChanges}
           fullWidth
           required
           label="Senha"
@@ -64,7 +82,7 @@ function Login(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: () => dispatch(login())
+    login: (token) => dispatch(login(token))
   }
 }
 
