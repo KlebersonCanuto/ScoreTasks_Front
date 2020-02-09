@@ -24,12 +24,14 @@ function Top(props) {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Link 
-          to="/" 
-          className="avenir white no-underline underline-hover b f3"
-        >
-          Inicio
-        </Link>
+        <p className="flex-grow-1">
+          <Link 
+            to="/" 
+            className="avenir white no-underline underline-hover b f3 flex-grow-1"
+          >
+            Inicio
+          </Link>
+        </p>
         { props.logged && 
           <div>
             <IconButton
