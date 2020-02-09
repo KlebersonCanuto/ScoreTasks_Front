@@ -7,6 +7,8 @@ import Home from './components/Home/Home'
 import Signup from './components/Signup/Signup'
 import Top from './components/Top/Top'
 import Profile from './components/Profile/Profile'
+import NewTask from './components/NewTask/NewTask'
+import './Styles.css'
 
 function App(props) {
   const logged = props.logged
@@ -18,6 +20,7 @@ function App(props) {
       { !logged && <Route exact path="/cadastro"> <Signup/> </Route> }
       { logged && <Route exact path="/"> <Home/> </Route> }
       { logged && <Route exact path="/perfil"> <Profile/> </Route> }
+      { logged && <Route exact path="/nova_tarefa"> <NewTask/> </Route> }
     </div>
   )
 }

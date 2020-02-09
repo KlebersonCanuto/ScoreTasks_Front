@@ -22,11 +22,11 @@ function Top(props) {
   }
 
   return (
-    <AppBar position="static" className="flex-grow-1">
+    <AppBar position="static">
       <Toolbar>
         <Link 
           to="/" 
-          className="avenir white no-underline underline-hover b f3 flex-grow-1"
+          className="avenir white no-underline underline-hover b f3"
         >
           Inicio
         </Link>
