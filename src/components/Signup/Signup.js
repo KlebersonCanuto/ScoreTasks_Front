@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { TextField, Button, Container, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import Axios from 'axios'
-import { URL } from '../../utils'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
-function Signup() {
+function Signup(props) {
 
   const initialState = {
     email: '',
@@ -16,9 +16,13 @@ function Signup() {
 
   const submit = (event) => {
     event.preventDefault()
-    Axios.post(`${URL}/user`, data)
-    .then((_) => {
-      setData(initialState);
+    props.newUser({
+      variables: {...data},
+      update: (proxy, { data: { addUser } }) => {
+        console.log(addUser)
+        setData(initialState);
+      }
+    }).catch(() => {
     })
   }
 
@@ -91,4 +95,13 @@ function Signup() {
   )
 }
 
-export default Signup
+const mutation = gql`
+  mutation ($email: String!, $password: String!, $confirmPassword: String!){
+    addUser(email: $email, password: $password, confirmPassword: $confirmPassword){
+      id
+      email
+    }
+  }
+`;
+
+export default graphql(mutation, { name: 'newUser' })(Signup)
