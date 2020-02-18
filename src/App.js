@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Route } from 'react-router-dom';
-import { mapStateToProps } from './redux'
 import Login from './components/Login/Login'
 import Home from './components/Home/Home'
 import Signup from './components/Signup/Signup'
@@ -10,8 +9,8 @@ import Profile from './components/Profile/Profile'
 import NewTask from './components/NewTask/NewTask'
 import './Styles.css'
 
-function App(props) {
-  const logged = props.logged
+function App() {
+  const logged = useSelector(state => state.logged)
   return (
     <div>
       <Top/>
@@ -25,6 +24,4 @@ function App(props) {
   )
 }
 
-export default connect(
-  mapStateToProps,
-)(App)
+export default App

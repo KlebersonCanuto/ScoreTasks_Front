@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { logout, mapStateToProps } from '../../redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../../redux'
 import { AppBar, Toolbar, IconButton, Menu, MenuItem } from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 
-function Top(props) {
+function Top() {
   const [anchorEl, setAnchorEl] = useState(null);
-  
+  const logged = useSelector(state => state.logged)  
+  const dispatch = useDispatch()
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -16,9 +18,9 @@ function Top(props) {
     setAnchorEl(null);
   };
 
-  const exit = () => {
+  function exit(){
     handleClose()
-    props.logout()
+    dispatch(logout())
   }
 
   return (
@@ -32,7 +34,7 @@ function Top(props) {
             Inicio
           </Link>
         </p>
-        { props.logged && 
+        { logged && 
           <div>
             <IconButton
               color="inherit"
@@ -60,13 +62,4 @@ function Top(props) {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(logout())
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Top)
+export default Top

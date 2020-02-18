@@ -1,5 +1,6 @@
 import loginReducer from './Login/reducer'
-const { createStore } = require('redux')
+import { createStore } from 'redux'
+
 const store = createStore(loginReducer)
 
 export default store

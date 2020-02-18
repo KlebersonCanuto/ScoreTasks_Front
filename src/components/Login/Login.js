@@ -1,25 +1,26 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { login, mapStateToProps } from '../../redux'
+import { useDispatch } from 'react-redux'
+import { login } from '../../redux'
 import { TextField, Button, Container, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import Axios from 'axios'
 import { URL } from '../../utils'
+import Axios from 'axios'
 
-function Login(props) {
+function Login() {
 
   const initialState = {
     email: '',
     password: ''
   }
-
+  
   const [data, setData] = useState(initialState)
+  const dispatch = useDispatch()
 
   const submit = (event) => {
     event.preventDefault()
     Axios.post(`${URL}/login`, data)
     .then((res) => {
-      props.login(res.data.token)
+      dispatch(login(res.data.token))
     })
   }
 
@@ -80,13 +81,4 @@ function Login(props) {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    login: (token) => dispatch(login(token))
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default Login
